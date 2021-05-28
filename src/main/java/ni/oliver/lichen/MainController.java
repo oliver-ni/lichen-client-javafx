@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import ni.oliver.lichen.apiclient.LichenClient;
 import ni.oliver.lichen.apiclient.Request;
+import ni.oliver.lichen.apiclient.Result;
 
 /**
  * The main controller of the application.
@@ -29,6 +30,9 @@ public class MainController {
     @FXML
     private FilePane filePane2;
 
+    @FXML
+    private Label score;
+
     public MainController() {
         client = new LichenClient();
     }
@@ -42,7 +46,12 @@ public class MainController {
     private void handleRequest(ActionEvent event) throws IOException, InterruptedException {
         var request = new Request(languageSelect.getValue(), List.of(filePane1.getCode(), filePane2.getCode()));
         var result = client.request(request);
+        updateUiForResult(result);
+    }
 
-        System.out.println(result.getScore());
+    private void updateUiForResult(Result result) {
+        score.setText(String.format("Similarity: %.2f", result.getScore()));
+        filePane1.updateMatches(result.getMatches().stream().map(m -> m.get(0)).toList());
+        filePane2.updateMatches(result.getMatches().stream().map(m -> m.get(1)).toList());
     }
 }

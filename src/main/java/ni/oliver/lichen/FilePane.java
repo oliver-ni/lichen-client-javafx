@@ -2,9 +2,13 @@ package ni.oliver.lichen;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
+import org.fxmisc.richtext.model.StyleSpansBuilder;
 
 import javafx.beans.NamedArg;
 import javafx.event.ActionEvent;
@@ -12,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import ni.oliver.lichen.apiclient.Result;
 
 /**
  * A file pane component with a simple code editor, and utilities to load files.
@@ -66,5 +71,21 @@ public class FilePane extends VBox {
      */
     public String getCode() {
         return codeArea.getText();
+    }
+
+    public void updateMatches(List<List<Integer>> entries) {
+        entries = entries.stream().sorted((a, b) -> Integer.compare(a.get(1), b.get(1))).toList();
+
+        var spansBuilder = new StyleSpansBuilder<Collection<String>>();
+        var last = 0;
+        for (var entry : entries) {
+            var start = entry.get(0);
+            var end = entry.get(1);
+            spansBuilder.add(Collections.emptyList(), start - last);
+            spansBuilder.add(Collections.singleton("match"), end - start);
+            last = end;
+        }
+
+        codeArea.setStyleSpans(0, spansBuilder.create());
     }
 }

@@ -33,3 +33,7 @@
   -fx-font-family: "Cascadia Code" !important;
   -fx-font-weight: 500;
 }
+
+.match {
+  -rtfx-background-color: orange;
+}

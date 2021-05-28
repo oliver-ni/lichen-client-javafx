@@ -29,6 +29,11 @@
                </items>
             </ComboBox>
             <Button text="Request" onAction="#handleRequest" />
+
+            <Separator />
+
+            <Label fx:id="score" styleClass="score" text="" />
+
          </children>
       </VBox>
       <FilePane fx:id="filePane1" HBox.hgrow="ALWAYS" labelText="Student 1" />
