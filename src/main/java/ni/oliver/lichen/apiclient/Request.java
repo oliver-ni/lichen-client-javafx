@@ -2,6 +2,9 @@ package ni.oliver.lichen.apiclient;
 
 import java.util.List;
 
+/**
+ * Represents an analysis request for the API.
+ */
 public class Request {
     private String lang;
     private List<String> files;
@@ -17,10 +20,20 @@ public class Request {
         this.files = files;
     }
 
+    /**
+     * Get the language.
+     * 
+     * @return the language.
+     */
     public String getLang() {
         return lang;
     }
 
+    /**
+     * Get the files.
+     * 
+     * @return the files.
+     */
     public List<String> getFiles() {
         return files;
     }

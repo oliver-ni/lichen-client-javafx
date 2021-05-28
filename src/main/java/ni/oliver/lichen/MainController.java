@@ -16,7 +16,7 @@ import ni.oliver.lichen.apiclient.Result;
  */
 public class MainController {
     private static final String INSTRUCTIONS = "This is a simple demo app for the Lichen Code Similarity Analyzer. Simply load in two files and select the language to make the request. The similarity score and matches will be visually displayed in this window.";
-    private LichenClient client;
+    private LichenClient client = new LichenClient();
 
     @FXML
     private Label instructions;
@@ -33,15 +33,18 @@ public class MainController {
     @FXML
     private Label score;
 
-    public MainController() {
-        client = new LichenClient();
-    }
-
     @FXML
     private void initialize() {
         instructions.setText(INSTRUCTIONS);
     }
 
+    /**
+     * Event handler for the "Request" button.
+     * 
+     * @param event the ActionEvent instance.
+     * @throws IOException          if something bad happened.
+     * @throws InterruptedException also if something bad happened.
+     */
     @FXML
     private void handleRequest(ActionEvent event) throws IOException, InterruptedException {
         var request = new Request(languageSelect.getValue(), List.of(filePane1.getCode(), filePane2.getCode()));
@@ -49,6 +52,11 @@ public class MainController {
         updateUiForResult(result);
     }
 
+    /**
+     * Updates the UI for a given check result.
+     * 
+     * @param result the result.
+     */
     private void updateUiForResult(Result result) {
         score.setText(String.format("Similarity: %.2f", result.getScore()));
         filePane1.updateMatches(result.getMatches().stream().map(m -> m.get(0)).toList());

@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import ni.oliver.lichen.apiclient.Result;
 
 /**
  * A file pane component with a simple code editor, and utilities to load files.
@@ -73,6 +72,11 @@ public class FilePane extends VBox {
         return codeArea.getText();
     }
 
+    /**
+     * Updates the UI, highlighting the given matches.
+     * 
+     * @param entries the list of positions (start and end) to highlight.
+     */
     public void updateMatches(List<List<Integer>> entries) {
         entries = entries.stream().sorted((a, b) -> Integer.compare(a.get(1), b.get(1))).toList();
 
