@@ -31,7 +31,7 @@
             <Button text="Request" onAction="#handleRequest" />
          </children>
       </VBox>
-      <FilePane HBox.hgrow="ALWAYS" labelText="Student 1" />
-      <FilePane HBox.hgrow="ALWAYS" labelText="Student 2" />
+      <FilePane fx:id="filePane1" HBox.hgrow="ALWAYS" labelText="Student 1" />
+      <FilePane fx:id="filePane2" HBox.hgrow="ALWAYS" labelText="Student 2" />
    </children>
 </HBox>

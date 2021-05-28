@@ -58,4 +58,13 @@ public class FilePane extends VBox {
             pathLabel.setText(file.getName());
         }
     }
+
+    /**
+     * Retrieves the code entered in the file pane.
+     * 
+     * @return the code.
+     */
+    public String getCode() {
+        return codeArea.getText();
+    }
 }
