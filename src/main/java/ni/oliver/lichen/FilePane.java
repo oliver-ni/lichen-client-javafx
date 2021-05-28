@@ -6,8 +6,10 @@ import java.nio.file.Files;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 
+import javafx.beans.NamedArg;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -18,18 +20,26 @@ public class FilePane extends VBox {
     @FXML
     private CodeArea codeArea;
 
+    @FXML
+    private Label label;
+
+    @FXML
+    private Label pathLabel;
+
     /**
-     * Constructs a file pane.
+     * Constructs a file pane with the given label text.
      * 
+     * @param labelText the contents of the label.
      * @throws IOException if FXML file could not be loaded.
      */
-    public FilePane() throws IOException {
+    public FilePane(@NamedArg("labelText") String labelText) throws IOException {
         var loader = Utils.loadFXML(this);
         loader.setRoot(this);
         loader.setController(this);
         loader.load();
 
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
+        label.setText(labelText);
     }
 
     /**
@@ -45,6 +55,7 @@ public class FilePane extends VBox {
         if (file != null) {
             var contents = Files.readString(file.toPath());
             codeArea.replaceText(contents);
+            pathLabel.setText(file.getName());
         }
     }
 }

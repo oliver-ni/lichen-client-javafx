@@ -16,8 +16,17 @@
   -fx-font-weight: bold;
 }
 
+.instructions {
+  -fx-line-spacing: 0.2em;
+}
+
 .file-pane {
   -fx-spacing: 10px;
+}
+
+.select-row {
+  -fx-spacing: 10px;
+  -fx-alignment: center-left;
 }
 
 .code-area {

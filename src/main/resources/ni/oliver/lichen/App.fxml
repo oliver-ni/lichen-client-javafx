@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import ni.oliver.lichen.FilePane?>
@@ -11,11 +15,23 @@
    <children>
       <VBox styleClass="panel" HBox.hgrow="NEVER">
          <children>
-            <Text text="Lichen Plagiarism Tool" styleClass="title" />
-            <Text text="Oliver Ni" styleClass="credits" />
+            <Label styleClass="title" text="Lichen Code Similarity Analyzer" wrapText="true" />
+            <Label styleClass="credits" text="Oliver Ni" wrapText="true" />
+            <Separator />
+            <Label fx:id="instructions" styleClass="instructions" wrapText="true" />
+
+            <ComboBox fx:id="languageSelect">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="java" />
+                     <String fx:value="py" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Button text="Request" onAction="#handleRequest" />
          </children>
       </VBox>
-      <FilePane HBox.hgrow="ALWAYS" />
-      <FilePane HBox.hgrow="ALWAYS" />
+      <FilePane HBox.hgrow="ALWAYS" labelText="Student 1" />
+      <FilePane HBox.hgrow="ALWAYS" labelText="Student 2" />
    </children>
 </HBox>
